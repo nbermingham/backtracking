@@ -6,3 +6,5 @@ class EightQueens:
 
 eq = EightQueens()
 print(eq.print_name("nick", "bermingham"))
+
+#adding in some comments
