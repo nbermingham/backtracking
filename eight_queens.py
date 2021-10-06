@@ -4,7 +4,6 @@ class EightQueens:
         self.first_name = first_name
         self.last_name = last_name
 
-    
     def print_name(self):
         """
         function that prints your first and last name
@@ -19,6 +18,7 @@ class EightQueens:
         return number_one + number_two
 
 eq = EightQueens("nick", "bermingham")
-eq.print_name() 
+eq.print_name()
 
+print(eq.add_two_numbers(1, 2))
 #adding in some comments
