@@ -1,4 +1,4 @@
-class EightQueens:
+class ClassExamples:
 
     def __init__(self, first_name: str, last_name: str):
         self.first_name = first_name
@@ -17,8 +17,8 @@ class EightQueens:
         """
         return number_one + number_two
 
-eq = EightQueens("nick", "bermingham")
-eq.print_name()
+ce = ClassExamples("nick", "bermingham")
+ce.print_name()
 
-print(eq.add_two_numbers(1, 2))
+print(ce.add_two_numbers(1, 2))
 #adding in some comments
