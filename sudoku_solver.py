@@ -4,19 +4,48 @@ solves a given sudoku solver given a 9 by 9 board
 from eight_queens import print_board
 from typing import List
 
-def solve_board_til(board: List[List[int]], presets: set(tuple(int, int)), curr: int) -> bool:
+def solve_board_til(board: List[List[int]], presets: set(int), curr: int, val: int) -> bool:
     """
     recursively solves board
     """
-    row, col = divmod(curr, N)
+
+    if val > 8:
+        return False
     
-    # if current coordinates is in presets
+    if curr >= N**2:
+        return True
+
+    # if current coordinates is in presets, go to next coordinate
     if curr in presets:
-        return solve_board_til(board, presets, curr + 1)
+        return solve_board_til(board, presets, curr + 1, 1)
+    
+    row, col = divmod(curr, N)
+    if is_valid(board, (row, col), val):
+        board[row][col] = val
+        if solve_board_til(board, presets, curr+1, 1):
+            return True
+        
+        solve_board_til(board, presets, curr, val+1)
+
+    
+
+    
+#    for i in range(N**2):
+#        val = 1
+#        row, col = divmod(i, N)
+#        if is_valid(board, row, col, val):
+#            board[row][col] = val
+#            if solve_board_til(board, presets, curr+1, val):
+#                return True
+#            if val == 8:
+#                return False
+#            else:
+#                return solve_board_til(board, presets, curr, val + 1)
+        
     
     return False
 
-def solve_board(board):
+def solve_board(board: List[List[int]]) -> bool:
     """
     solves the board
     """
@@ -24,7 +53,8 @@ def solve_board(board):
     for i in range(N):
         for j in range(N):
             presets.add(9*i+j)
-    if solve_board_til(board, presets, 0):
+    if solve_board_til(board, presets, 0, 1):
+        print_board(board)
         return True
     print("no solution") 
     return False
@@ -107,6 +137,5 @@ if __name__ == "__main__":
              [0, 3, 0, 0, 0, 5, 8, 2, 4],
              [5, 8, 2, 4, 0, 3, 6, 1, 9],
              [0, 6, 9, 0, 2, 1, 5, 0, 0]]
-    print_board(board)
-    print(is_valid(board, 0, 1, 9))
-    print("hello")
+
+    solve_board(board)
